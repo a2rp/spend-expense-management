@@ -54,7 +54,7 @@
 .emptyChart { display: grid; min-height: 160px; place-items: center; color: var(--muted); font-size: 14px; text-align: center; }
 .ledger { margin-top: 15px; padding-bottom: 12px; }
 .tableWrap { width: 100%; overflow-x: auto; }
-.tableWrap table { width: 100%; border-collapse: collapse; text-align: left; }
+.tableWrap table { width: 100%; min-width: 720px; border-collapse: collapse; text-align: left; }
 .tableWrap th { padding: 10px 9px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; font-weight: 690; white-space: nowrap; }
 .tableWrap td { padding: 12px 9px; border-bottom: 1px solid #eeece7; color: var(--ink-soft); font-size: 13px; white-space: nowrap; }
 .tableWrap tr:last-child td { border-bottom: 0; }
