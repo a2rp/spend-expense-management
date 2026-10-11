@@ -6,7 +6,7 @@
 }
 .heading p { margin-bottom: 5px; color: var(--coral-dark); font-size: 13px; font-weight: 750; }
 .heading h1 { color: var(--ink); font-size: clamp(32px, 4vw, 42px); font-weight: 780; letter-spacing: -1.5px; line-height: 1.1; }
-.heading span { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
+.heading > div > span { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
 .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
     @media (max-width: 650px) { grid-template-columns: minmax(0, 1fr); }
 }
