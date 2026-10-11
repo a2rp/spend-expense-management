@@ -53,6 +53,9 @@
 .monthBar > span { min-height: 34px; color: var(--muted); font-size: 13px; text-align: center; }
 .emptyChart { display: grid; min-height: 160px; place-items: center; color: var(--muted); font-size: 14px; text-align: center; }
 .ledger { margin-top: 15px; padding-bottom: 12px; }
+.scrollHint { display: none; margin: -7px 0 9px; color: var(--muted); font-size: 13px;
+    @media (max-width: 720px) { display: block; }
+}
 .tableWrap { width: 100%; overflow-x: auto; }
 .tableWrap table { width: 100%; min-width: 720px; border-collapse: collapse; text-align: left; }
 .tableWrap th { padding: 10px 9px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; font-weight: 690; white-space: nowrap; }
