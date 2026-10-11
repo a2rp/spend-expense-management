@@ -1,0 +1,37 @@
+.toast {
+    position: fixed;
+    z-index: 1000;
+    top: 94px;
+    right: 24px;
+    display: grid;
+    width: min(390px, calc(100vw - 32px));
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: 12px;
+    overflow: hidden;
+    padding: 16px 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: var(--surface);
+    box-shadow: 0 12px 36px rgb(32 39 51 / 16%);
+    animation: show 180ms ease-out;
+}
+
+.icon { margin-top: 1px; color: var(--green); font-size: 20px; }
+.toast strong { color: var(--ink); font-size: 14px; }
+.toast p { margin-top: 3px; color: var(--muted); font-size: 13px; }
+.toast button { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--muted); font-size: 17px; }
+.error .icon { color: var(--danger); }
+.info .icon { color: var(--blue); }
+.progress { position: absolute; right: 0; bottom: 0; left: 0; height: 3px; background: var(--coral); transform-origin: left; animation: expire 4300ms linear forwards; }
+
+@keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes expire { to { transform: scaleX(0); } }
+
+@media (max-width: 560px) {
+    .toast { top: 80px; right: 16px; }
+}
