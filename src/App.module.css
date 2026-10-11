@@ -1,0 +1,2 @@
+.app { display: flex; min-height: 100vh; flex-direction: column; }
+.main { width: 100%; flex: 1; padding: 76px 0 54px; scroll-margin-top: 90px; @media (max-width: 880px) { padding-top: 68px; } }
