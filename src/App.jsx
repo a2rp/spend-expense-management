@@ -37,14 +37,18 @@ const App = () => {
             setExpenses((current) => current.map((expense) => expense.id === expenseDialog.expense.id ? { ...expense, ...draft } : expense));
             notify("Expense updated", "The expense record is up to date.");
         } else {
+            const autoApprovalPolicy = policies.find((policy) => policy.active && policy.name.trim().toLowerCase() === "small expense auto-approval" && draft.amount <= policy.limit);
+            const autoApproved = Boolean(autoApprovalPolicy);
             const newExpense = {
                 ...draft,
+                status: autoApproved ? "Approved" : "Needs review",
+                reviewNote: autoApproved ? `Auto-approved under ${autoApprovalPolicy.name}.` : "",
                 id: getNextExpenseId(expenses),
                 team: teamByMember[draft.employee] || "Operations",
                 card: draft.card || cards[0]?.name || "Out of pocket",
             };
             setExpenses((current) => [newExpense, ...current]);
-            notify("Expense submitted", "It is now in the review queue.");
+            notify(autoApproved ? "Expense auto-approved" : "Expense submitted", autoApproved ? "It met the active small expense limit." : "It is now in the review queue.");
         }
         setExpenseDialog(null);
     };
