@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 
 const today = new Date().toISOString().slice(0, 10);
 
-const ExpenseForm = ({ expense, categories, onSave }) => {
+const ExpenseForm = ({ expense, categories, cards = [], onSave }) => {
     const [form, setForm] = useState(() => ({
         merchant: expense?.merchant || "",
         purpose: expense?.purpose || "",
@@ -13,6 +13,7 @@ const ExpenseForm = ({ expense, categories, onSave }) => {
         date: expense?.date || today,
         category: expense?.category || categories[0],
         employee: expense?.employee || teamMembers[0],
+        card: expense?.card || cards[0]?.name || "Out of pocket",
         receipt: expense?.receipt ? "Attached" : "Missing",
         note: expense?.note || "",
     }));
@@ -38,6 +39,7 @@ const ExpenseForm = ({ expense, categories, onSave }) => {
                 <label>What was this for?<input maxLength="90" name="purpose" onChange={update} placeholder="A short business purpose" value={form.purpose} /></label>
                 <label>Team member<select name="employee" onChange={update} value={form.employee}>{teamMembers.map((member) => <option key={member}>{member}</option>)}</select></label>
                 <label>Category<select name="category" onChange={update} value={form.category}>{categories.map((category) => <option key={category}>{category}</option>)}</select></label>
+                <label>Payment source<select name="card" onChange={update} value={form.card}>{cards.map((card) => <option key={card.id}>{card.name}</option>)}<option>Out of pocket</option></select></label>
                 <label>Transaction date<input name="date" onChange={update} type="date" value={form.date} /></label>
                 <label>Receipt status<select name="receipt" onChange={update} value={form.receipt}><option>Attached</option><option>Missing</option></select></label>
                 <label className={styles.full}>Note<textarea maxLength="220" name="note" onChange={update} placeholder="Add a useful detail for the reviewer" rows="3" value={form.note} /></label>
