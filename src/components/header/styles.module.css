@@ -43,7 +43,9 @@
 }
 .search > svg { flex: 0 0 auto; font-size: 17px; }
 .search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 13px; }
-.search input::placeholder { color: #89939e; }
+.search input::placeholder { color: #89939e;
+    @media (max-width: 560px) { color: transparent; }
+}
 .search kbd { padding: 2px 5px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); font-size: 13px; white-space: nowrap;
     @media (max-width: 560px) { display: none; }
 }
