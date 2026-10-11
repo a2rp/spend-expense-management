@@ -62,7 +62,7 @@ const Policies = ({ policies, categories, onSavePolicy, onDeletePolicy, onToggle
                 </article>)}
             </section> : <section className={styles.empty}><FiFileText aria-hidden="true" /><h2>No policies match this view.</h2><p>Try another search or category filter.</p><Button onClick={() => { setSearch(""); setCategory("All categories"); }}>Clear filters</Button></section>}
 
-            <section className={styles.note}><strong>How the sample checks work</strong><p>Active receipt, meal, and hotel rules are evaluated on each expense. Other rules flag matching categories when the amount passes their threshold. These checks help reviewers and do not automatically approve or decline expenses.</p></section>
+            <section className={styles.note}><strong>How the sample checks work</strong><p>Receipt, meal, hotel, and custom thresholds are checked against expense data. When active, Small expense auto-approval approves new submissions within its limit. These sample rules do not process payments.</p></section>
 
             <Modal description="Define a category, amount threshold, and reviewer instruction." onClose={closeForm} open={Boolean(editing)} title={editing?.policy ? "Edit review policy" : "Create review policy"}>
                 <PolicyForm categories={categories} key={editing?.policy?.id || editing?.type} onSave={savePolicy} policy={editing?.policy} />
