@@ -3,7 +3,7 @@ import { FiAlertTriangle, FiPlus, FiTrash2 } from "react-icons/fi";
 import Button from "../../components/button/index.jsx";
 import BudgetForm from "../../components/budgetForm/index.jsx";
 import Modal from "../../components/modal/index.jsx";
-import { formatCurrency } from "../../utils/format.js";
+import { formatCurrency, isExpenseInBudgetPeriod } from "../../utils/format.js";
 import styles from "./styles.module.css";
 
 const Budgets = ({ budgets, expenses, categories, onSaveBudget, onDeleteBudget }) => {
@@ -12,7 +12,7 @@ const Budgets = ({ budgets, expenses, categories, onSaveBudget, onDeleteBudget }
     const [view, setView] = useState("All categories");
     const [sort, setSort] = useState("usage");
     const rows = useMemo(() => budgets.map((budget) => {
-        const spent = expenses.filter((expense) => expense.category === budget.category && expense.status !== "Declined").reduce((sum, expense) => sum + expense.amount, 0);
+        const spent = expenses.filter((expense) => expense.category === budget.category && expense.status !== "Declined" && isExpenseInBudgetPeriod(expense, budget.period)).reduce((sum, expense) => sum + expense.amount, 0);
         const usage = budget.limit > 0 ? spent / budget.limit * 100 : 0;
         return { ...budget, spent, usage, remaining: budget.limit - spent };
     }).filter((budget) => view === "All categories" || budget.category === view).sort((a, b) => {
@@ -22,8 +22,7 @@ const Budgets = ({ budgets, expenses, categories, onSaveBudget, onDeleteBudget }
         return b.usage - a.usage;
     }), [budgets, expenses, view, sort]);
     const totalLimit = budgets.reduce((sum, budget) => sum + budget.limit, 0);
-    const plannedCategories = new Set(budgets.map((budget) => budget.category));
-    const totalSpent = expenses.filter((expense) => plannedCategories.has(expense.category) && expense.status !== "Declined").reduce((sum, expense) => sum + expense.amount, 0);
+    const totalSpent = expenses.filter((expense) => expense.status !== "Declined" && budgets.some((budget) => budget.category === expense.category && isExpenseInBudgetPeriod(expense, budget.period))).reduce((sum, expense) => sum + expense.amount, 0);
     const overLimit = rows.filter((budget) => budget.usage > 100).length;
     const closeForm = () => setEditing(null);
     const saveBudget = (draft) => {
