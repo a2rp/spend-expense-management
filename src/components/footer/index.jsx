@@ -1,6 +1,7 @@
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaPatreon, FaYoutube } from "react-icons/fa";
+import { FaCodepen } from "react-icons/fa6";
 import { FiGlobe, FiLifeBuoy, FiMail } from "react-icons/fi";
-import { SiBuymeacoffee, SiCodepen } from "react-icons/si";
+import { SiBuymeacoffee } from "react-icons/si";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { Link } from "react-router-dom";
@@ -9,7 +10,7 @@ import styles from "./styles.module.css";
 const links = [
     { label: "Portfolio", href: "https://www.ashishranjan.net", icon: <FiGlobe aria-hidden="true" /> },
     { label: "GitHub", href: "https://github.com/a2rp", icon: <FaGithub aria-hidden="true" /> },
-    { label: "CodePen", href: "https://codepen.io/ash1198", icon: <SiCodepen aria-hidden="true" /> },
+    { label: "CodePen", href: "https://codepen.io/ash1198", icon: <FaCodepen aria-hidden="true" /> },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/aashishranjan", icon: <FaLinkedinIn aria-hidden="true" /> },
     { label: "Facebook", href: "https://www.facebook.com/theash.ashish/", icon: <FaFacebookF aria-hidden="true" /> },
     { label: "YouTube", href: "https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1", icon: <FaYoutube aria-hidden="true" /> },
