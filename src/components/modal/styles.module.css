@@ -8,6 +8,7 @@
     place-items: center;
     background: rgb(31 36 47 / 55%);
     backdrop-filter: blur(5px);
+    @media (max-width: 560px) { padding: 12px; align-items: end; }
 }
 
 .dialog {
@@ -18,26 +19,20 @@
     background: var(--surface);
     box-shadow: 0 24px 80px rgb(20 26 38 / 25%);
     animation: appear 180ms ease-out;
+    @media (max-width: 560px) { border-radius: 16px; }
 }
 
 .wide { width: min(100%, 740px); }
-.header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 22px 24px 18px; border-bottom: 1px solid var(--line); }
-.header h2 { color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 25px; line-height: 1.2; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 22px 24px 18px; border-bottom: 1px solid var(--line); @media (max-width: 560px) { padding: 18px 18px 14px; } }
+.header h2 { color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 25px; line-height: 1.2; @media (max-width: 560px) { font-size: 23px; } }
 .header p { max-width: 580px; margin-top: 7px; color: var(--muted); font-size: 14px; }
 .closeButton { display: grid; width: 40px; height: 40px; flex: 0 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--muted); font-size: 19px; }
 .body { max-height: min(66vh, 620px); overflow-y: auto; }
-.actions { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 24px 22px; border-top: 1px solid var(--line); }
+.actions { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 24px 22px; border-top: 1px solid var(--line); @media (max-width: 560px) { flex-wrap: wrap; padding: 14px 18px 18px; } }
 
 @keyframes appear {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@media (max-width: 560px) {
-    .overlay { padding: 12px; align-items: end; }
-    .dialog { border-radius: 16px; }
-    .header { padding: 18px 18px 14px; }
-    .header h2 { font-size: 23px; }
-    .actions { flex-wrap: wrap; padding: 14px 18px 18px; }
-    .actions > * { flex: 1 1 auto; }
-}
+.actions > * { @media (max-width: 560px) { flex: 1 1 auto; } }
