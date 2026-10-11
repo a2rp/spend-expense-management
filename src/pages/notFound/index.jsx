@@ -1,10 +1,10 @@
-import { FiArrowLeft, FiFileQuestion } from "react-icons/fi";
+import { FiArrowLeft, FiHelpCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const NotFound = () => (
     <main className={styles.page}>
-        <span className={styles.icon}><FiFileQuestion aria-hidden="true" /></span>
+        <span className={styles.icon}><FiHelpCircle aria-hidden="true" /></span>
         <p>404 / Not in this ledger</p>
         <h1>We couldn’t find that page.</h1>
         <span className={styles.copy}>The address may be incomplete, or the page may have moved.</span>
