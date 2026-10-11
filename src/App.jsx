@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import AppRoutes from "./AppRoutes.jsx";
 import ExpenseForm from "./components/expenseForm/index.jsx";
 import Footer from "./components/footer/index.jsx";
@@ -123,7 +123,7 @@ const App = () => {
         notify("Policy status changed", "The active policy list is up to date.");
     };
 
-    const appData = useMemo(() => ({
+    const appData = {
         expenses,
         cards,
         budgets,
@@ -142,7 +142,7 @@ const App = () => {
         onSavePolicy: savePolicy,
         onDeletePolicy: deletePolicy,
         onTogglePolicy: togglePolicy,
-    }), [expenses, cards, budgets, policies, notify]);
+    };
 
     return (
         <div className={styles.app}>
