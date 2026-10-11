@@ -22,9 +22,9 @@ export const getExpenseFlags = (expense, policies) => policies
         const name = policy.name.trim().toLowerCase();
         const overLimit = expense.amount > policy.limit;
         const categoryMatches = policy.category === "All categories" || policy.category === expense.category;
-        if (name === "receipt required" && overLimit && !expense.receipt) return ["Missing receipt"];
-        if (name === "team meal limit" && expense.category === "Meals" && overLimit) return ["Meal limit exceeded"];
-        if (name === "hotel nightly limit" && expense.category === "Travel" && expense.merchant.toLowerCase().includes("hotel") && overLimit) return ["Travel limit review"];
+        if (name === "receipt required") return overLimit && !expense.receipt ? ["Missing receipt"] : [];
+        if (name === "team meal limit") return expense.category === "Meals" && overLimit ? ["Meal limit exceeded"] : [];
+        if (name === "hotel nightly limit") return expense.category === "Travel" && expense.merchant.toLowerCase().includes("hotel") && overLimit ? ["Travel limit review"] : [];
         if (name === "small expense auto-approval") return [];
         if (categoryMatches && overLimit) return [`${policy.name} threshold exceeded`];
         return [];
