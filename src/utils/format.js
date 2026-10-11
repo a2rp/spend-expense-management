@@ -19,9 +19,14 @@ export const formatDate = (date, options = { month: "short", day: "numeric" }) =
 export const getExpenseFlags = (expense, policies) => policies
     .filter((policy) => policy.active)
     .flatMap((policy) => {
-        if (policy.name === "Receipt required" && expense.amount > policy.limit && !expense.receipt) return ["Missing receipt"];
-        if (policy.name === "Team meal limit" && expense.category === "Meals" && expense.amount > policy.limit) return ["Meal limit exceeded"];
-        if (policy.name === "Hotel nightly limit" && expense.category === "Travel" && expense.merchant.toLowerCase().includes("hotel") && expense.amount > policy.limit) return ["Travel limit review"];
+        const name = policy.name.trim().toLowerCase();
+        const overLimit = expense.amount > policy.limit;
+        const categoryMatches = policy.category === "All categories" || policy.category === expense.category;
+        if (name === "receipt required" && overLimit && !expense.receipt) return ["Missing receipt"];
+        if (name === "team meal limit" && expense.category === "Meals" && overLimit) return ["Meal limit exceeded"];
+        if (name === "hotel nightly limit" && expense.category === "Travel" && expense.merchant.toLowerCase().includes("hotel") && overLimit) return ["Travel limit review"];
+        if (name === "small expense auto-approval") return [];
+        if (categoryMatches && overLimit) return [`${policy.name} threshold exceeded`];
         return [];
     });
 
