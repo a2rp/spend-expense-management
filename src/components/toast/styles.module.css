@@ -15,6 +15,7 @@
     background: var(--surface);
     box-shadow: 0 12px 36px rgb(32 39 51 / 16%);
     animation: show 180ms ease-out;
+    @media (max-width: 560px) { top: 80px; right: 16px; }
 }
 
 .icon { margin-top: 1px; color: var(--green); font-size: 20px; }
@@ -31,7 +32,3 @@
 }
 
 @keyframes expire { to { transform: scaleX(0); } }
-
-@media (max-width: 560px) {
-    .toast { top: 80px; right: 16px; }
-}
