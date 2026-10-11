@@ -61,7 +61,7 @@ const Reports = ({ expenses, budgets, policies, notify }) => {
         document.body.append(anchor);
         anchor.click();
         anchor.remove();
-        URL.revokeObjectURL(url);
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
         notify("Report downloaded", `${filtered.length} expense records were exported as CSV.`);
     };
 
