@@ -1,0 +1,8 @@
+.pill { display: inline-flex; min-height: 28px; align-items: center; padding: 3px 9px; border-radius: 999px; background: var(--surface-soft); color: var(--ink-soft); font-size: 13px; font-weight: 700; white-space: nowrap; }
+.review { background: var(--amber-pale); color: #80540f; }
+.approved,
+.active { background: var(--green-pale); color: var(--green); }
+.paid { background: #e8eff7; color: var(--blue); }
+.declined,
+.paused { background: var(--danger-pale); color: var(--danger); }
+.neutral { background: var(--surface-soft); color: var(--muted); }
