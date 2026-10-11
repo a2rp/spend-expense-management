@@ -1,0 +1,10 @@
+.form { display: grid; gap: 16px; padding: 20px 24px 24px; @media (max-width: 560px) { padding: 18px; } }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; @media (max-width: 560px) { grid-template-columns: minmax(0, 1fr); } }
+.fields label { display: grid; min-width: 0; gap: 7px; color: var(--ink-soft); font-size: 14px; font-weight: 700; }
+.fields input,
+.fields select,
+.fields textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 14px; }
+.fields textarea { resize: vertical; }
+.full { grid-column: 1 / -1; @media (max-width: 560px) { grid-column: auto; } }
+.error { padding: 10px 12px; border-radius: 8px; background: var(--danger-pale); color: var(--danger); font-size: 14px; }
+.actions { display: flex; justify-content: flex-end; }
