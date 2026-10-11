@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FiCreditCard, FiGithub, FiMenu, FiPlus, FiSearch, FiX } from "react-icons/fi";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../button/index.jsx";
 import styles from "./styles.module.css";
 
@@ -19,7 +19,6 @@ const Header = ({ onNewExpense }) => {
     const [search, setSearch] = useState("");
     const searchRef = useRef(null);
     const previousY = useRef(0);
-    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,8 +34,6 @@ const Header = ({ onNewExpense }) => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [menuOpen]);
 
-    useEffect(() => { setMenuOpen(false); }, [location.pathname]);
-
     useEffect(() => {
         const handleShortcut = (event) => {
             if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
@@ -50,6 +47,7 @@ const Header = ({ onNewExpense }) => {
 
     const submitSearch = (event) => {
         event.preventDefault();
+        setMenuOpen(false);
         const query = search.trim();
         navigate(query ? `/expenses?search=${encodeURIComponent(query)}` : "/expenses");
     };
@@ -70,7 +68,7 @@ const Header = ({ onNewExpense }) => {
                         <input aria-label="Search expenses" onChange={(event) => setSearch(event.target.value)} placeholder="Search expenses" ref={searchRef} value={search} />
                         <kbd>Ctrl K</kbd>
                     </form>
-                    <Button aria-label="New expense" icon={<FiPlus />} onClick={onNewExpense} variant="primary">New expense</Button>
+                    <Button aria-label="New expense" icon={<FiPlus />} onClick={() => { setMenuOpen(false); onNewExpense(); }} variant="primary">New expense</Button>
                     <a className={styles.repository} href="https://github.com/a2rp/spend-expense-management" rel="noreferrer" target="_blank"><FiGithub aria-hidden="true" /> <span>Repository</span></a>
                 </div>
                 <button aria-expanded={menuOpen} aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"} className={styles.menuButton} onClick={() => setMenuOpen((current) => !current)} type="button">
