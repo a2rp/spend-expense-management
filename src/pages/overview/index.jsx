@@ -1,18 +1,18 @@
 import { FiArrowUpRight, FiCheck, FiCreditCard, FiFileText, FiInbox, FiTrendingUp } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import StatusPill from "../../components/statusPill/index.jsx";
-import { formatCompactCurrency, formatCurrency, formatDate } from "../../utils/format.js";
+import { formatCompactCurrency, formatCurrency, formatDate, isExpenseInBudgetPeriod } from "../../utils/format.js";
 import styles from "./styles.module.css";
 
 const Overview = ({ expenses, budgets }) => {
-    const countedExpenses = expenses.filter((expense) => expense.status !== "Declined");
+    const countedExpenses = expenses.filter((expense) => expense.status !== "Declined" && isExpenseInBudgetPeriod(expense, "Monthly"));
     const totalSpend = countedExpenses.reduce((sum, expense) => sum + expense.amount, 0);
-    const pending = expenses.filter((expense) => expense.status === "Needs review").sort((a, b) => b.date.localeCompare(a.date));
-    const cleared = expenses.filter((expense) => ["Approved", "Paid"].includes(expense.status)).reduce((sum, expense) => sum + expense.amount, 0);
+    const pending = expenses.filter((expense) => expense.status === "Needs review" && isExpenseInBudgetPeriod(expense, "Monthly")).sort((a, b) => b.date.localeCompare(a.date));
+    const cleared = countedExpenses.filter((expense) => ["Approved", "Paid"].includes(expense.status)).reduce((sum, expense) => sum + expense.amount, 0);
     const totalBudget = budgets.reduce((sum, budget) => sum + budget.limit, 0);
     const remaining = Math.max(totalBudget - totalSpend, 0);
     const budgetRows = budgets.map((budget) => {
-        const spent = countedExpenses.filter((expense) => expense.category === budget.category).reduce((sum, expense) => sum + expense.amount, 0);
+        const spent = expenses.filter((expense) => expense.category === budget.category && expense.status !== "Declined" && isExpenseInBudgetPeriod(expense, budget.period)).reduce((sum, expense) => sum + expense.amount, 0);
         return { ...budget, spent, progress: budget.limit ? Math.min(spent / budget.limit * 100, 100) : 0 };
     }).sort((a, b) => b.progress - a.progress).slice(0, 3);
 
