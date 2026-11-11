@@ -3,14 +3,17 @@ import Button from "../button/index.jsx";
 import { teamMembers } from "../../data/seed.js";
 import styles from "./styles.module.css";
 
-const today = new Date().toISOString().slice(0, 10);
+const getLocalDate = () => {
+    const date = new Date();
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+};
 
 const ExpenseForm = ({ expense, categories, cards = [], onSave }) => {
     const [form, setForm] = useState(() => ({
         merchant: expense?.merchant || "",
         purpose: expense?.purpose || "",
         amount: expense ? String(expense.amount) : "",
-        date: expense?.date || today,
+        date: expense?.date || getLocalDate(),
         category: expense?.category || categories[0],
         employee: expense?.employee || teamMembers[0],
         card: expense?.card || cards[0]?.name || "Out of pocket",
